@@ -151,7 +151,7 @@ class XArmRobot(Robot):
 
     def __init__(
         self,
-        ip: str = "192.168.1.226",
+        ip: str = "192.168.1.205",
         real: bool = True,
         control_frequency: float = 50.0,
         max_delta: float = DEFAULT_MAX_DELTA,

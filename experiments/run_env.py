@@ -28,7 +28,7 @@ def print_color(*args, color=None, attrs=(), **kwargs):
 class Args:
     agent: str = "none"
     robot_port: int = 6001
-    wrist_camera_port: int = 5000
+    # wrist_camera_port: int = 5000
     base_camera_port: int = 5001
     hostname: str = "127.0.0.1"
     robot_type: str = None  # only needed for quest agent or spacemouse agent
@@ -38,7 +38,7 @@ class Args:
     gello_port: Optional[str] = None
     mock: bool = False
     use_save_interface: bool = False
-    data_dir: str = "~/bc_data"
+    data_dir: str = "~/Gavin/pasta/data"
     bimanual: bool = False
     verbose: bool = False
 
