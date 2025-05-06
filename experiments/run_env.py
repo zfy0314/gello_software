@@ -13,6 +13,7 @@ from gello.agents.gello_agent import GelloAgent
 from gello.data_utils.format_obs import save_frame
 from gello.env import RobotEnv
 from gello.robots.robot import PrintRobot
+from gello.zmq_core.camera_node import ZMQClientCamera
 from gello.zmq_core.robot_node import ZMQClientRobot
 
 
@@ -29,7 +30,7 @@ class Args:
     agent: str = "none"
     robot_port: int = 6001
     # wrist_camera_port: int = 5000
-    base_camera_port: int = 5001
+    base_camera_port: int = 5000
     hostname: str = "127.0.0.1"
     robot_type: str = None  # only needed for quest agent or spacemouse agent
     hz: int = 100
@@ -51,7 +52,7 @@ def main(args):
         camera_clients = {
             # you can optionally add camera nodes here for imitation learning purposes
             # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
-            # "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
+            "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
         }
         robot_client = ZMQClientRobot(port=args.robot_port, host=args.hostname)
     env = RobotEnv(robot_client, control_rate_hz=args.hz, camera_dict=camera_clients)
@@ -117,7 +118,7 @@ def main(args):
                     )
             if args.start_joints is None:
                 reset_joints = np.deg2rad(
-                    [0, -90, 90, -90, -90, 0, 0]
+                    [0, -80, 0, 60, 0, 140, 0]
                 )  # Change this to your own reset joints
             else:
                 reset_joints = args.start_joints
