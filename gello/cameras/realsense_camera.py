@@ -45,6 +45,8 @@ class RealSenseCamera(CameraDriver):
         config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
         config.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 30)
         self._pipeline.start(config)
+        self._align = rs.align(rs.stream.color)
+        self._align.as_hole_filling_filter()
         self._flip = flip
 
     def read(
@@ -64,9 +66,10 @@ class RealSenseCamera(CameraDriver):
         import cv2
 
         frames = self._pipeline.wait_for_frames()
-        color_frame = frames.get_color_frame()
+        aligned_frames = self._align.process(frames)
+        color_frame = aligned_frames.get_color_frame()
+        depth_frame = aligned_frames.get_depth_frame()
         color_image = np.asanyarray(color_frame.get_data())
-        depth_frame = frames.get_depth_frame()
         depth_image = np.asanyarray(depth_frame.get_data())
         # depth_image = cv2.convertScaleAbs(depth_image, alpha=0.03)
         if img_size is None:

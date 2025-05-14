@@ -33,7 +33,7 @@ class Args:
     base_camera_port: int = 5000
     hostname: str = "127.0.0.1"
     robot_type: str = None  # only needed for quest agent or spacemouse agent
-    hz: int = 100
+    hz: int = 30
     start_joints: Optional[Tuple[float, ...]] = None
 
     gello_port: Optional[str] = None
