@@ -49,7 +49,7 @@ PORT_CONFIG_MAP: Dict[str, DynamixelRobotConfig] = {
     "Serial_Converter_FT9MIR7Z-if00-port0": DynamixelRobotConfig(
         joint_ids=(1, 2, 3, 4, 5, 6, 7),
         joint_offsets=(
-            2 * np.pi / 2,
+            3 * np.pi / 2,
             3 * np.pi / 2,
             3 * np.pi / 2,
             0 * np.pi / 2,

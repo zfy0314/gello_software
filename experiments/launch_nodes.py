@@ -9,7 +9,7 @@ from gello.zmq_core.robot_node import ZMQServerRobot
 
 @dataclass
 class Args:
-    robot: str = "xarm"
+    robot: str = "xarm_robotiq"
     robot_port: int = 6001
     hostname: str = "127.0.0.1"
     robot_ip: str = "192.168.1.205"
@@ -57,6 +57,10 @@ def launch_robot_server(args: Args):
     else:
         if args.robot == "xarm":
             from gello.robots.xarm_robot import XArmRobot
+
+            robot = XArmRobot(ip=args.robot_ip)
+        if args.robot == "xarm_robotiq":
+            from gello.robots.xarm_robot_robotiq import XArmRobot
 
             robot = XArmRobot(ip=args.robot_ip)
         elif args.robot == "ur":
