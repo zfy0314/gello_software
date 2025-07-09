@@ -24,7 +24,7 @@ def main(args):
     ids = get_device_ids()
     camera_port = 5000
     camera_servers = []
-    for camera_id in ids:
+    for camera_id in sorted(ids):
         # start a python process for each camera
         print(f"Launching camera {camera_id} on port {camera_port}")
         camera_servers.append(

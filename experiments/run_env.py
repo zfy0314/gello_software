@@ -29,8 +29,9 @@ def print_color(*args, color=None, attrs=(), **kwargs):
 class Args:
     agent: str = "none"
     robot_port: int = 6001
-    # wrist_camera_port: int = 5000
     base_camera_port: int = 5000
+    corner1_camera_port: int = 5001
+    corner2_camera_port: int = 5002
     hostname: str = "127.0.0.1"
     robot_type: str = None  # only needed for quest agent or spacemouse agent
     hz: int = 30
@@ -53,6 +54,12 @@ def main(args):
             # you can optionally add camera nodes here for imitation learning purposes
             # "wrist": ZMQClientCamera(port=args.wrist_camera_port, host=args.hostname),
             "base": ZMQClientCamera(port=args.base_camera_port, host=args.hostname),
+            "corner1": ZMQClientCamera(
+                port=args.corner1_camera_port, host=args.hostname
+            ),
+            "corner2": ZMQClientCamera(
+                port=args.corner2_camera_port, host=args.hostname
+            ),
         }
         robot_client = ZMQClientRobot(port=args.robot_port, host=args.hostname)
     env = RobotEnv(robot_client, control_rate_hz=args.hz, camera_dict=camera_clients)
